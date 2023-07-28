@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Registry</title>
+  <link rel="stylesheet" href="/css/jass.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body style="c3">
+  <header class="display-flex justify-space-between align-center p-2 c1">
+    <h1>
+      The Tech Blog
+    </h1>
+    <nav>
+      <a href="">Home</a>
+      <a href="">Dashboard</a>
+      {{#if loggedIn}}
+      <button id="logout" class="btn-no-style">Logout</button>
+      {{else}}
+      <!-- Otherwise, show a link to login -->
+      <a href="/login">Login</a>
+      {{/if}}
+    </nav>
+
+  </header>
+  <main class="container container-fluid mt-5">
+    <!-- Render the contents of the sub layout here -->
+    {{{ body }}}
+  </main>
+  <footer>
+      
+  </footer>
+</body>
+
+</html>
