@@ -1,21 +1,40 @@
-<div class="row justify-space-between-md">
-  <div class="login-card">
-    <h2 class="page-title">Login</h2>
-    <form class="form login-form">
-      <div class="form-group">
-        <label for="email-login">Email:</label>
-        <input class="form-input" type="text" id="email-login" />
-      </div>
-      <div class="form-group">
-        <label for="password-login">Password:</label>
-        <input class="form-input" type="password" id="password-login" />
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">login</button>
-      </div>
-    </form>
-    <a  class="btn btn-primary" href="/signup">Signup</a>
-  </div>
+<div class="w3-col l12 s12 ">
+  <form class="w3-container login-form">
+
+    <label for="email-login">Email</label>
+    <input 
+      class="w3-input" 
+      type="text" 
+      id="email-login"
+    >
+
+    <label for="password-login">Password</label>
+    <input 
+      class="w3-input" 
+      type="password"
+      id="password-login"
+    >
+    
+    <p>
+      <button 
+        class="w3-button w3-padding-large w3-white w3-border" 
+        type="submit"
+      >
+        <b>LOGIN »</b>
+      </button>
+    </p>
+
+    <p>
+      <button 
+        class="w3-button w3-padding-large w3-white w3-border" 
+        onclick="window.location.replace('signup');"
+        type="button"
+      >
+        <b>SIGNUP »</b>
+      </button>
+    </p>
+
+  </form>
 </div>
 
 <script src="./js/login.js"></script>
