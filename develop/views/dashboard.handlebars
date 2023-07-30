@@ -1,27 +1,34 @@
 <!-- Blog entries -->
 <div class="w3-col l12 s12">
+  {{#each projects}}
   <!-- Blog entry -->
   <div class="w3-card-4 w3-margin w3-white">
     <div class="w3-container">
-      <h3><b>TITLE HEADING</b></h3>
-      <h5>Title description, <span class="w3-opacity">April 7, 2014</span></h5>
+      <h3><b>{{name}}</b></h3>
+      <h5>By {{user.name}}, <span class="w3-opacity">{{format_date date_created}}</span></h5>
     </div>
 
     <div class="w3-container">
-      <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed
-        tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      <p>{{description}}</p>
       <div class="w3-row">
         <div class="w3-col m8 s12">
-          <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button></p>
-        </div>
-        <div class="w3-col m4 w3-hide-small">
-          <p><span class="w3-padding-large w3-right"><b>Comments </b> <span class="w3-tag">0</span></span></p>
+          <p>
+            <button 
+              class="w3-button w3-padding-large w3-white w3-border" 
+              onclick="window.location.replace('project/{{id}}');">
+              <b>READ MORE »</b>
+            </button>
+            <button 
+              class="w3-btn w3-red">
+              <b>Delete</b>
+            </button>
+          </p>
         </div>
       </div>
     </div>
   </div>
   <hr>
-
+  {{/each}}
 <!-- END BLOG ENTRIES -->
 </div>
 
@@ -32,7 +39,7 @@
 
 <div class="container m-5">
   <div class="login-card">
-    <form class="form signup-form">
+    <form class="form post-form">
       <div class="form-group">
         <label for="post-name">Post Name:</label>
         <input class="form-input" type="text" id="post-name" />
@@ -47,8 +54,3 @@
     </form>
   </div>
 </div>
-
-{{> projects}}
-
-
-<script src="./js/new-post.js"></script>

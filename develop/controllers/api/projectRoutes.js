@@ -32,8 +32,9 @@ router.get('/', async (req,res) => {
 })
 
 // get project data by id
-router.get('/:id', async (req,res) => {
+router.get('/:id', withAuth, async (req,res) => {
   try {
+    console.log(req.session)
     const project = await Project.findByPk(req.params.id, {
       include: [
         {
@@ -46,8 +47,14 @@ router.get('/:id', async (req,res) => {
       ],
     })
 
+
+    // req.session.project_id = req.params.id
+
+
     if (!project) {
+      
       res.status(404).json({ message: 'No products found with this id!' });
+      
       return;
     }
 
@@ -76,14 +83,14 @@ router.post('/', withAuth, async (req, res) => {
 
 router.delete('/:id', withAuth, async (req, res) => {
   try {
-
+    
     const projectData = await Project.destroy({
       where: {
         id: req.params.id,
         user_id: req.session.user_id,
       },
     });
-
+    
     if (!projectData) {
       res.status(404).json({ message: 'No project found with this id!' });
       return;

@@ -22,6 +22,44 @@ router.get('/', async (req,res) => {
   }
 })
 
+// router.post('/', withAuth, async (req, res) => {
+//   try {
+//     console.log(req.session)
+//     const newComment = await Project.create({
+//       ...req.body,
+//       user_id: req.session.user_id || req.body.user_id,
+      
+//     });
+//     console.log(req.session)
+//     console.log(newComment)
+
+//     res.status(200).json(newComment);
+
+//   } catch (err) {
+
+//     res.status(400).json(err);
+
+//   }
+// });
+router.post('/', withAuth, async (req, res) => {
+  try {
+    const newComment = await Comment.create({
+      text: req.body.text,
+      user_id: req.session.user_id,
+      project_id: req.session.project_id,
+    });
+
+    res.status(200).json(newComment);
+
+  } catch (err) {
+
+    res.status(400).json(err);
+
+  }
+});
+
+
+
 // // get project data by id
 // router.get('/:id', async (req,res) => {
 //   try {

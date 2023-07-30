@@ -69,7 +69,6 @@ router.post('/', async (req, res) => {
     });
   } catch (err) {
 
-    console.log(err);
     res.status(500).json(err);
     
   }
@@ -95,13 +94,14 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    req.session.save(() => {
+    req.session.save( () => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-      
+      req.session.project_id = 1
+
       res.json({ user: userData, message: 'You are now logged in!' });
     });
-
+    console.log(req.session.user_id)
   } catch (err) {
     res.status(400).json(err);
   }

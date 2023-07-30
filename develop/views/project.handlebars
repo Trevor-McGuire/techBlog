@@ -1,36 +1,45 @@
-<div class="container m-5 c1">
-  <a href="project/{{id}}">
-    <div class="w-100 p-3">
-      <span>{{name}}</span>
-      <span>Posted by {{user.name}} on {{format_date date_created}}</span>
+<!-- Single project entry -->
+<div class="w3-col l12 s12">
+  
+  <div class="w3-card-4 w3-margin w3-white">
+    <div class="w3-container">
+      <h3><b>{{name}}</b></h3>
+      <h5>By {{user.name}}, <span class="w3-opacity">{{format_date date_created}}</span></h5>
     </div>
-    <div class="p-3 c2">
-      {{description}}
+    <div class="w3-container">
+      <p>{{description}}</p>
     </div>
-  </a>
+  </div>
+  <hr>
+<!-- END SINGLE PROJECT ENTRY -->
 </div>
 
-{{#each comments}}
-<div class="container m-5 c1">
-  <div class="w-100 p-3">
-    <span>{{text}}</span>
-    <span>Posted by {{user.name}} on {{format_date date_created}}</span>
+<!-- Comment entries -->
+<div class="w3-col l12 s12">
+  <!-- Comment entry -->
+  {{#each comments}}
+  <div class="w3-card-4 w3-margin w3-white">
+    <div class="w3-container">
+      <p>{{text}}</p>
+    </div>
+    <div class="w3-container">
+      <h5>By {{user.name}}, <span class="w3-opacity">{{format_date date_created}}</span></h5>
+    </div>
   </div>
-  <div class="p-3 c2">
-    {{description}}
-  </div>
+  <hr>
+  {{/each}}
+<!-- END COMMENT ENTRIE/S -->
 </div>
-{{/each}}
 
 <div class="container m-5">
   <div class="login-card">
-    <form class="form signup-form">
+    <form class="form comment-form">
       <div class="form-group">
-        <label for="post-description">Comment:</label>
-        <textarea class="form-input" id="post-comment" /></textarea>
+        <label for="comment-text">Comment:</label>
+        <textarea class="form-input" id="comment-text" /></textarea>
       </div>
       <div class="form-group">
-        <button id="new-post" class="btn btn-primary" type="submit">Submit Comment</button>
+        <button class="btn btn-primary" type="submit">Submit Comment</button>
       </div>
     </form>
   </div>

@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
       projects, 
       logged_in: req.session.logged_in 
     });
-    console.log(projects)
+
   } catch (err) {
 
     res.status(500).json(err);
@@ -35,9 +35,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/project/:id', async (req, res) => {
+router.get('/project/:id', withAuth, async (req, res) => {
   try {
-
+    req.session.project_id = req.params.id
+    console.log("req.session: ",req.session)
     const projectData = await Project.findByPk(req.params.id, {
       include: [
         {
@@ -47,11 +48,15 @@ router.get('/project/:id', async (req, res) => {
             attributes: ['name']
           }
         },
+        {
+          model:User,
+          attributes: ['name'],
+        }
       ],
     });
 
     const project = projectData.get({ plain: true });
-console.log(project)
+
     res.render('project', {
       ...project,
       logged_in: req.session.logged_in
