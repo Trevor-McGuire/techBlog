@@ -1,0 +1,73 @@
+<!-- Page title -->
+<div class="w3-col l12 s12">
+  <div class="w3-card-4 w3-margin w3-white">
+    <div class="w3-bar w3-center">
+      <h3><b>{{name}}</b></h3>
+      <h5>By {{user.name}}, <span class="w3-opacity">{{format_date date_created}}</span></h5>
+    </div>
+    <div class="w3-container">
+      <p class="w3-margin-top">{{description}}</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- Page title -->
+<div class="w3-col ">
+  <div class="w3-margin ">
+    <div class="w3-bar w3-center">
+      <p>
+        <button 
+          id="show-comment-form"
+          class=
+            "
+              w3-button 
+              w3-circle 
+              w3-clear
+              w3-border 
+              w3-border-green
+              w3-hover-green
+              w3-ripple
+            ">
+          <b>+</b>
+        </button>
+      </p>
+    </div>
+    <form id="comment-form" class="w3-container w3-hide">
+      <label class="w3-text-green"><b>Comment</b></label>
+      <textarea id="comment-text" class="w3-input w3-border w3-margin-bottom" type="text"></textarea>
+      <p>
+        <button type="submit" class="w3-btn w3-green">Create</button>
+        <button 
+            id="hide-comment-form"
+            class=
+              "
+                w3-button 
+                w3-circle 
+                w3-clear
+                w3-border 
+                w3-border-red
+                w3-hover-red
+                w3-ripple
+              ">
+            <b>x</b>
+          </button>
+      </p>
+    </form>
+  </div>
+</div>
+
+<!-- Comment entries -->
+<div class="w3-col l12 s12 w3-padding">
+  <div class="w3-card-4">
+    {{#each comments}}
+    <div class="w3-container w3-Pale-Blue w3-border">
+      <p>{{text}}</p>
+      <h5 class="w3-small">By {{user.name}}, <span class="w3-opacity">{{format_date date_created}}</span></h5>
+    </div>
+    {{/each}}
+  </div>
+  <hr>
+</div>
+
+<script src="{{path}}/js/comment.js"></script>
