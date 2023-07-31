@@ -41,7 +41,6 @@ router.get('/project/:id', withAuth, async (req, res) => { console.log("homeRout
 
 router.get('/dashboard', withAuth, async (req, res) => { console.log("homeRoutes.get('/dashboard')")
   try {
-    console.log(req.session)
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [
