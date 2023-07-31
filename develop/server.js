@@ -17,7 +17,7 @@ const hbs = exphbs.create({ helpers });
 app.use(session({
   secret: 'Super secret secret',
   cookie: {
-    maxAge: 3000000,
+    maxAge: 300000, // 5 minutes
     httpOnly: true,
     secure: false,
     sameSite: 'strict',
