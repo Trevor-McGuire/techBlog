@@ -24,7 +24,7 @@ Comment.belongsTo(Project, {
 })
 
 Comment.belongsTo(User, {
-  foreignKey: 'project_id',
+  foreignKey: 'user_id',
 })
 
 

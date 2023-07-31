@@ -1,113 +1,70 @@
 const router = require('express').Router();
 const { User,Project } = require('../../models');
 
-// find all users and their projects
-router.get('/', async (req,res) => {
+// INSOMNIA
+router.get('/', async (req,res) => { console.log("api/userRoutes.get('/')")
   try {
-
     const userData = await User.findAll({
       include: [
-        {
-          model: Project,
-          attributes: ['name'],
-        },
+        {model: Project,attributes: ['name'],},
       ],
     })
     res.status(200).json(userData)
-
-  } catch (err) {
-
-    res.status(500).json(err)
-
-  }
+  } catch (err) {res.status(500).json(err)}
 })
 
-// get one user
-router.get('/:name', async (req, res) => {
-  // find a single user by its `name` including their associated Projects
+router.get('/:name', async (req, res) => { console.log("api/userRoutes.get('/:name')")
   try {
-    
     const userData = await User.findOne({ 
       where: { name: req.params.name },
       include: [
         {model: Project},
       ]
     })
-
     if (!userData) {
       res.status(404).json({ message: 'No users found with this name!' });
       return;
     }
-
     res.status(200).json(userData);
-
-  } catch (err) {
-
-    res.status(500).json(err);
-
-  }
+  } catch (err) {res.status(500).json(err);}
 });
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res) => { console.log("api/userRoutes.post('/')")
   try {
-
-    console.log(req.body)
-
     const dbUserData = await User.create({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
     });
-
-    // Set up sessions with a 'logged_in' variable set to `true`
     req.session.save(() => {
-
       req.session.logged_in = true;
-
+      req.session.user_id = dbUserData.id;
+      req.session.project_id = 1
       res.status(200).json(dbUserData);
-
     });
-  } catch (err) {
-
-    res.status(500).json(err);
-    
-  }
+  } catch (err) {res.status(500).json(err);}
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', async (req, res) => { console.log("api/userRoutes.post('/login')")
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
-
-    if (!userData) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
-      return;
-    }
-
     const validPassword = await userData.checkPassword(req.body.password);
-
-    if (!validPassword) {
+    if (!userData || !validPassword) {
       res
         .status(400)
         .json({ message: 'Incorrect email or password, please try again' });
       return;
     }
-
     req.session.save( () => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
       req.session.project_id = 1
-
-      res.json({ user: userData, message: 'You are now logged in!' });
+      res.status(200).json({ user: userData, message: 'You are now logged in!' });
     });
-    console.log(req.session.user_id)
-  } catch (err) {
-    res.status(400).json(err);
-  }
+  } catch (err) {res.status(400).json(err);}
 });
 
-router.post('/logout', (req, res) => {
+router.post('/logout', (req, res) => { console.log("api/userRoutes.post('/logout')")
   if (req.session.logged_in) {
     req.session.destroy(() => {
       res.status(204).end();

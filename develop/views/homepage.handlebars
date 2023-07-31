@@ -5,19 +5,17 @@
       <h3><b>Welcome Home</b></h3>
     </div>
   </div>
-<!-- END PAGE TITLE -->
 </div>
+
 
 <!-- Blog entries -->
 <div class="w3-col l12 s12">
   {{#each projects}}
-  <!-- Blog entry -->
   <div class="w3-card-4 w3-margin w3-white">
     <div class="w3-container">
       <h3><b>{{name}}</b></h3>
       <h5>By {{user.name}}, <span class="w3-opacity">{{format_date date_created}}</span></h5>
     </div>
-
     <div class="w3-container">
       <p>{{description}}</p>
       <div class="w3-row">
@@ -26,8 +24,7 @@
             <button 
               class="w3-button w3-padding-large w3-white w3-border" 
               onclick="window.location.replace('project/{{id}}');"
-            >
-              <b>READ MORE »</b>
+              ><b>READ MORE »</b>
             </button>
           </p>
         </div>
@@ -39,5 +36,4 @@
   </div>
   <hr>
   {{/each}}
-<!-- END BLOG ENTRIES -->
 </div>

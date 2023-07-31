@@ -1,38 +1,19 @@
-<div class="w3-col l12 s12 ">
-  <form class="w3-container login-form">
-
-    <label for="email-login">Email</label>
-    <input 
-      class="w3-input" 
-      type="text" 
-      id="email-login"
-    >
-
-    <label for="password-login">Password</label>
-    <input 
-      class="w3-input" 
-      type="password"
-      id="password-login"
-    >
-    
-    <p>
-      <button 
-        class="w3-button w3-padding-large w3-white w3-border" 
-        type="submit"
-      >
-        <b>LOGIN »</b>
-      </button>
-    </p>
-
-    <p>
-      <button 
-        class="w3-button w3-padding-large w3-white w3-border" 
-        onclick="window.location.replace('signup');"
-        type="button"
-      >
-        <b>SIGNUP »</b>
-      </button>
-    </p>
-
-  </form>
+<div class="w3-col ">
+  <div class="w3-card-4 w3-margin w3-white">
+    <div class="w3-bar w3-center">
+      <h3><b>Loggin</b></h3>
+    </div>
+    <form id="login-form" class="w3-container">
+      <label class="w3-text-blue"><b>Email</b></label>
+      <input id="email-login" class="w3-input w3-border" type="email">
+      <label class="w3-text-blue"><b>Password</b></label>
+      <input id="password-login" class="w3-input w3-border w3-margin-bottom" type="password">
+      <p>
+        <button type="submit" class="w3-button w3-blue">LOGIN »</button>
+        <button type="button" class="w3-button w3-green w3-right" onclick="window.location.replace('signup');">SIGNUP »</button>
+      </p>
+    </form>
+  </div>
 </div>
+
+<script src="{{path}}/js/login.js"></script>

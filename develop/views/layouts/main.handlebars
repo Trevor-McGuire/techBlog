@@ -27,15 +27,15 @@
     <header class="w3-container w3-center w3-padding-32"> 
       <h1><b>The Tech Blog</b></h1>
       <p>Welcome to the blog of <span class="w3-tag">The Future</span></p>
-      <nav>
-        <a href="/">Home</a>
-        
+      <nav class="w3-bar">
+        <a href="/"class="w3-bar-item w3-button">Home</a>
+        <a href="/dashboard"class="w3-bar-item w3-button">Dashboard</a>
         {{#if logged_in}}
-        <a href="/dashboard">Dashboard</a>
-        <a id="logout" href="/">Logout</a>
+        <a id="logout" href="/"class="w3-bar-item w3-button">Logout</a>
+        <script src="{{path}}/js/logout.js"></script>
         {{else}}
         <!-- Otherwise, show a link to login -->
-        <a href="/login">Login</a>
+        <a href="/login"class="w3-bar-item w3-button">Login</a>
         {{/if}}
       </nav>
     </header>
@@ -53,4 +53,3 @@
 
 </body>
 
-<script src="{{path}}/js/main.js"></script>

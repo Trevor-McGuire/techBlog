@@ -2,109 +2,70 @@ const router = require('express').Router();
 const { Project, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res) => { console.log("homeRoutes.get('/')")
   try {
-
-    // Get all projects and JOIN with user data
     const projectData = await Project.findAll({
       include: [
-        {
-          model: User,
-          attributes: ['name'],
-        },
-        {
-          model: Comment,
-          
-        }
+        {model: User,attributes: ['name'],},
+        {model: Comment,}
       ],
     });
-    
-    // Serialize data so the template can read it
     const projects = projectData.map((project) => project.get({ plain: true }));
-
-    // Pass serialized data and session flag into template
+    projects.reverse()
     res.render('homepage', { 
       projects, 
       logged_in: req.session.logged_in 
     });
-
-  } catch (err) {
-
-    res.status(500).json(err);
-    
-  }
+  } catch (err) {res.status(500).json(err);}
 });
 
-router.get('/project/:id', withAuth, async (req, res) => {
+router.get('/project/:id', withAuth, async (req, res) => { console.log("homeRoutes.get('/project/:id')")
   try {
     req.session.project_id = req.params.id
-    console.log("req.session: ",req.session)
     const projectData = await Project.findByPk(req.params.id, {
       include: [
-        {
-          model: Comment,
-          include: {
-            model: User,
-            attributes: ['name']
-          }
-        },
-        {
-          model:User,
-          attributes: ['name'],
-        }
+        {model: Comment,include: [
+          {model: User,attributes: ['name']}
+        ]},
+        {model:User,attributes: ['name'],}
       ],
     });
-
     const project = projectData.get({ plain: true });
-
+    project.comments.reverse()
     res.render('project', {
       ...project,
       logged_in: req.session.logged_in
     });
-
-  } catch (err) {
-
-    res.status(500).json(err);
-
-  }
+  } catch (err) {res.status(500).json(err);}
 });
 
-
-// Use withAuth middleware to prevent access to route
-router.get('/dashboard', withAuth, async (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => { console.log("homeRoutes.get('/dashboard')")
   try {
-    // Find the logged in user based on the session ID
-
+    console.log(req.session)
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Project ,
-        include: { model : User}
-      }],
+      include: [
+        {model: Project,include: { model : User},}
+      ],
     });
-
     const user = userData.get({ plain: true });
-
+    user.projects.reverse()
     res.render('dashboard', {
-      ...user
+      ...user,
+      logged_in: req.session.logged_in
     });
-  } catch (err) {
-    res.status(500).json(err);
-  }
+  } catch (err) {res.status(500).json(err);}
 });
 
-// Login route
-router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect to the homepage
+router.get('/login', (req, res) => { console.log("homeRoutes.get('/login')")
   if (req.session.logged_in) {
     res.redirect('/');
     return;
   }
-  // Otherwise, render the 'login' template
   res.render('login');
 });
 
-// Login route
-router.get('/signup', (req, res) => {
+router.get('/signup', (req, res) => { console.log("homeRoutes.get('/signup')")
   res.render('signup');
 });
 

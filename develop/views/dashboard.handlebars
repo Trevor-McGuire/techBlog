@@ -1,3 +1,54 @@
+<!-- Page title -->
+<div class="w3-col ">
+  <div class="w3-card-4 w3-margin w3-white">
+    <div class="w3-bar w3-center">
+      <h3><b>Welcome to your Dashboard {{name}}</b></h3>
+    </div>
+    <div class="w3-bar w3-center">
+      <p>
+        <button 
+          id="show-project-form"
+          class=
+            "
+              w3-button 
+              w3-circle 
+              w3-clear
+              w3-border 
+              w3-border-green
+              w3-hover-green
+              w3-ripple
+            ">
+          <b>+</b>
+        </button>
+      </p>
+    </div>
+    <form id="project-form" class="w3-container w3-hide">
+      <label class="w3-text-green"><b>Project Name</b></label>
+      <input id="project-name" class="w3-input w3-border" type="text">
+      <label class="w3-text-green"><b>Project Description</b></label>
+      <textarea id="project-description" class="w3-input w3-border w3-margin-bottom" type="text"></textarea>
+      <p>
+        <button type="submit" class="w3-btn w3-green">Create</button>
+        <button 
+            id="hide-project-form"
+            class=
+              "
+                w3-button 
+                w3-circle 
+                w3-clear
+                w3-border 
+                w3-border-red
+                w3-hover-red
+                w3-ripple
+              ">
+            <b>x</b>
+          </button>
+      </p>
+    </form>
+  </div>
+</div>
+
+
 <!-- Blog entries -->
 <div class="w3-col l12 s12">
   {{#each projects}}
@@ -7,21 +58,39 @@
       <h3><b>{{name}}</b></h3>
       <h5>By {{user.name}}, <span class="w3-opacity">{{format_date date_created}}</span></h5>
     </div>
-
     <div class="w3-container">
       <p>{{description}}</p>
       <div class="w3-row">
         <div class="w3-col m8 s12">
           <p>
             <button 
-              class="w3-button w3-padding-large w3-white w3-border" 
+              class=
+                "
+                  w3-button 
+                  w3-large
+                  w3-white 
+                  w3-border
+                  w3-ripple
+                " 
               onclick="window.location.replace('project/{{id}}');">
               <b>READ MORE »</b>
             </button>
-            <button 
-              class="w3-btn w3-red">
-              <b>Delete</b>
-            </button>
+            <button
+              onclick = "deleteProjectHandler(event)"
+              data-project-id="{{id}}"
+              class=
+                "
+                  delete-project
+                  w3-button 
+                  w3-circle 
+                  w3-clear
+                  w3-border 
+                  w3-border-red
+                  w3-hover-red
+                  w3-ripple
+                ">
+              <b>x</b>
+          </button>
           </p>
         </div>
       </div>
@@ -32,25 +101,4 @@
 <!-- END BLOG ENTRIES -->
 </div>
 
-
-
-
-
-
-<div class="container m-5">
-  <div class="login-card">
-    <form class="form post-form">
-      <div class="form-group">
-        <label for="post-name">Post Name:</label>
-        <input class="form-input" type="text" id="post-name" />
-      </div>
-      <div class="form-group">
-        <label for="post-description">Post Description:</label>
-        <textarea class="form-input" id="post-description" /></textarea>
-      </div>
-      <div class="form-group">
-        <button id="new-post" class="btn btn-primary" type="submit">New Post</button>
-      </div>
-    </form>
-  </div>
-</div>
+<script src="{{path}}/js/project.js"></script>
